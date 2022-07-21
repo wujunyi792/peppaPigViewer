@@ -3,7 +3,6 @@ package core
 import (
 	"github.com/patrickmn/go-cache"
 	"golang.org/x/time/rate"
-	"newJwCourseHelper/internal/util/ua"
 	"time"
 )
 
@@ -21,10 +20,10 @@ func (u *User) getRequestRate() *rate.Limiter {
 func (u *User) init() {
 	u.formParam = make(map[string]string, 10)
 	u.info = new(baseInfo)
-	u.rateBucket = rate.NewLimiter(rate.Every(5*time.Second), 3)
+	u.rateBucket = rate.NewLimiter(rate.Every(time.Duration(u.config.rate)*time.Second), u.config.bucketFull)
 	u.config = new(missionConfig)
 	u.cache = cache.New(1*time.Hour, 24*time.Hour)
-	u.client = u.NewRequestClient(ua.GetUA())
+	u.client = u.newRequestClient()
 }
 
 func (u *User) getCache() *cache.Cache {

@@ -1,0 +1,14 @@
+[
+  {
+    "user": {
+      "staffId": "",
+      "password": ""
+    },
+    "target": [],
+    "errTag": [],
+    "bucketFull": 0,
+    "rate": 0,
+    "ua": "",
+    "interval": 0
+  }
+]

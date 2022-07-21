@@ -8,11 +8,11 @@ import (
 	"net/http"
 )
 
-// NewRequestClient 初始化请求客户端
-func (u *User) NewRequestClient(ua string) *resty.Client {
+// newRequestClient 初始化请求客户端
+func (u *User) newRequestClient() *resty.Client {
 	client := resty.New()
 	client.SetHeaders(map[string]string{
-		"User-Agent": ua,
+		"User-Agent": u.config.ua,
 		"Cookie":     u.getCookie(),
 	})
 	//client.SetDebug(true)

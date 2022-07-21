@@ -20,6 +20,7 @@ type missionConfig struct {
 	errTag     []string
 	bucketFull int
 	rate       int
+	ua         string
 }
 
 type User struct {

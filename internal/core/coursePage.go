@@ -105,6 +105,7 @@ func (u *User) FireCourses() ([]string, error) {
 			if err != nil {
 				log.Printf("【err】 选择 %s 时发生错误： %v\n", fireList[i].Jxbmc, err.Error())
 				u.config.errTag = append(u.config.errTag, fireList[i].Jxbmc)
+				continue
 			}
 			success = append(success, fireList[i].Jxbmc)
 

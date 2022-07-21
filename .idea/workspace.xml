@@ -5,32 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/const.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/course.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/coursePage.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/homePage.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/initService.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/interface.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/model.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/request.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/core/user.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/service/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/util/ua/ua.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.json.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/const.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/dto.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dto.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/entrance.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/core/coursePage.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/coursePage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/core/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/core/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/core/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/core/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/main_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/util/field/field.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,20 +67,23 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\go_workspace\newJwCourseHelper" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\go_workspace\newJwCourseHelper\internal\user" />
       <recent name="D:\go_workspace\newJwCourseHelper\internal" />
       <recent name="D:\go_workspace\newJwCourseHelper\internal\model" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestNewModule in newJwCourseHelper">
-    <configuration name="go build newJwCourseHelper" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Build.go build newJwCourseHelper/cmd">
+    <configuration name="go build newJwCourseHelper/cmd" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="newJwCourseHelper" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="newJwCourseHelper" />
+      <package value="newJwCourseHelper/cmd" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/main.go" />
+      <filePath value="$PROJECT_DIR$/cmd/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="TestLogin in newJwCourseHelper" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -106,17 +95,6 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestLogin\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestMakeForm in newJwCourseHelper" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="newJwCourseHelper" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="newJwCourseHelper" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestMakeForm\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestNewModule in newJwCourseHelper" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -141,13 +119,24 @@
       <pattern value="^\QTestRate\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestUA in newJwCourseHelper" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="newJwCourseHelper" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="newJwCourseHelper" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestUA\E$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build newJwCourseHelper/cmd" />
         <item itemvalue="Go Test.TestNewModule in newJwCourseHelper" />
+        <item itemvalue="Go Test.TestUA in newJwCourseHelper" />
         <item itemvalue="Go Test.TestRate in newJwCourseHelper" />
         <item itemvalue="Go Test.TestLogin in newJwCourseHelper" />
-        <item itemvalue="Go Build.go build newJwCourseHelper" />
-        <item itemvalue="Go Test.TestMakeForm in newJwCourseHelper" />
       </list>
     </recent_temporary>
   </component>
@@ -173,5 +162,16 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$USER_HOME$/go/pkg/mod/github.com/!e!d!d!y!c!j!y/fake-useragent@v0.2.0/useragent/warehouse.go</url>
+          <line>27</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

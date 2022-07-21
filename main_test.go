@@ -3,9 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	browser "github.com/EDDYCJY/fake-useragent"
 	"github.com/PuerkitoBio/goquery"
 	"golang.org/x/time/rate"
 	"log"
+	"newJwCourseHelper/internal/config"
 	"newJwCourseHelper/internal/core"
 	"strings"
 	"testing"
@@ -13,7 +15,13 @@ import (
 )
 
 func TestNewModule(t *testing.T) {
-	res, err := core.LoginPW("", "")
+	res, err := core.LoadConfig(config.Config{
+		Target:     []string{},
+		ErrTag:     []string{},
+		BucketFull: 5,
+		Rate:       3,
+		Ua:         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+	}).LoginPW("", "")
 	if err != nil {
 		panic(err)
 	}
@@ -576,3 +584,9 @@ http://blog.csdn.net/remote_roamer/article/details/14105999
 //	}
 //	println(form.makeForm())
 //}
+
+func TestUA(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		println(browser.Random())
+	}
+}
