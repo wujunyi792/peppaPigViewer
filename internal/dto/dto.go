@@ -1,4 +1,4 @@
-package main
+package dto
 
 import (
 	"fmt"
@@ -6,12 +6,191 @@ import (
 	"strings"
 )
 
-const (
-	JWHOST        = "newjw.hdu.edu.cn"
-	JWBASE        = "https://newjw.hdu.edu.cn/jwglxt"
-	JWHOMEPAGEURI = "/xtgl/index_initMenu.html?jsdm=xs&_t="
-	UA            = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
-)
+type CourseListResp struct {
+	TmpList []struct {
+		Blyxrs             string `json:"blyxrs"`
+		Blzyl              string `json:"blzyl"`
+		Cxbj               string `json:"cxbj"`
+		Date               string `json:"date"`
+		DateDigit          string `json:"dateDigit"`
+		DateDigitSeparator string `json:"dateDigitSeparator"`
+		Day                string `json:"day"`
+		Fxbj               string `json:"fxbj"`
+		Jgpxzd             string `json:"jgpxzd"`
+		JxbId              string `json:"jxb_id"`
+		Jxbmc              string `json:"jxbmc"`
+		Jxbzls             string `json:"jxbzls"`
+		Kch                string `json:"kch"`
+		KchId              string `json:"kch_id"`
+		Kcmc               string `json:"kcmc"`
+		Kcrow              string `json:"kcrow"`
+		Kklxdm             string `json:"kklxdm"`
+		Kzmc               string `json:"kzmc"`
+		Listnav            string `json:"listnav"`
+		LocaleKey          string `json:"localeKey"`
+		Month              string `json:"month"`
+		PageTotal          int    `json:"pageTotal"`
+		Pageable           bool   `json:"pageable"`
+		QueryModel         struct {
+			CurrentPage   int           `json:"currentPage"`
+			CurrentResult int           `json:"currentResult"`
+			EntityOrField bool          `json:"entityOrField"`
+			Limit         int           `json:"limit"`
+			Offset        int           `json:"offset"`
+			PageNo        int           `json:"pageNo"`
+			PageSize      int           `json:"pageSize"`
+			ShowCount     int           `json:"showCount"`
+			Sorts         []interface{} `json:"sorts"`
+			TotalCount    int           `json:"totalCount"`
+			TotalPage     int           `json:"totalPage"`
+			TotalResult   int           `json:"totalResult"`
+		} `json:"queryModel"`
+		Rangeable   bool   `json:"rangeable"`
+		Sftj        string `json:"sftj"`
+		TotalResult string `json:"totalResult"`
+		UserModel   struct {
+			Monitor    bool   `json:"monitor"`
+			RoleCount  int    `json:"roleCount"`
+			RoleKeys   string `json:"roleKeys"`
+			RoleValues string `json:"roleValues"`
+			Status     int    `json:"status"`
+			Usable     bool   `json:"usable"`
+		} `json:"userModel"`
+		Xf         string `json:"xf"`
+		Xxkbj      string `json:"xxkbj"`
+		Year       string `json:"year"`
+		Yxzrs      string `json:"yxzrs"`
+		DetailList *CourseDetail
+		HaveSet    bool // 是否可选（余量充足）
+	} `json:"tmpList"`
+	Sfxsjc string `json:"sfxsjc"`
+}
+
+type CourseDetail struct {
+	Date               string `json:"date"`
+	DateDigit          string `json:"dateDigit"`
+	DateDigitSeparator string `json:"dateDigitSeparator"`
+	Day                string `json:"day"`
+	DoJxbId            string `json:"do_jxb_id"`
+	Fxbj               string `json:"fxbj"`
+	Jgpxzd             string `json:"jgpxzd"`
+	Jsxx               string `json:"jsxx"`
+	JxbId              string `json:"jxb_id"`
+	Jxbrl              string `json:"jxbrl"`
+	Jxdd               string `json:"jxdd"`
+	Jxms               string `json:"jxms"`
+	Kclbmc             string `json:"kclbmc"`
+	Kcxzmc             string `json:"kcxzmc"`
+	Kkxymc             string `json:"kkxymc"`
+	Listnav            string `json:"listnav"`
+	LocaleKey          string `json:"localeKey"`
+	Month              string `json:"month"`
+	PageTotal          int    `json:"pageTotal"`
+	Pageable           bool   `json:"pageable"`
+	QueryModel         struct {
+		CurrentPage   int           `json:"currentPage"`
+		CurrentResult int           `json:"currentResult"`
+		EntityOrField bool          `json:"entityOrField"`
+		Limit         int           `json:"limit"`
+		Offset        int           `json:"offset"`
+		PageNo        int           `json:"pageNo"`
+		PageSize      int           `json:"pageSize"`
+		ShowCount     int           `json:"showCount"`
+		Sorts         []interface{} `json:"sorts"`
+		TotalCount    int           `json:"totalCount"`
+		TotalPage     int           `json:"totalPage"`
+		TotalResult   int           `json:"totalResult"`
+	} `json:"queryModel"`
+	Rangeable   bool   `json:"rangeable"`
+	Sksj        string `json:"sksj"`
+	TotalResult string `json:"totalResult"`
+	UserModel   struct {
+		Monitor    bool   `json:"monitor"`
+		RoleCount  int    `json:"roleCount"`
+		RoleKeys   string `json:"roleKeys"`
+		RoleValues string `json:"roleValues"`
+		Status     int    `json:"status"`
+		Usable     bool   `json:"usable"`
+	} `json:"userModel"`
+	XqhId string `json:"xqh_id"`
+	Xqumc string `json:"xqumc"`
+	Year  string `json:"year"`
+	Yqmc  string `json:"yqmc"`
+}
+
+type CourseChosenResp struct {
+	Bdzcbj             string `json:"bdzcbj"`
+	Cxbj               string `json:"cxbj"`
+	Date               string `json:"date"`
+	DateDigit          string `json:"dateDigit"`
+	DateDigitSeparator string `json:"dateDigitSeparator"`
+	Day                string `json:"day"`
+	DoJxbId            string `json:"do_jxb_id"`
+	IsInxksj           string `json:"isInxksj"`
+	Jgpxzd             string `json:"jgpxzd"`
+	Jsxx               string `json:"jsxx"`
+	JxbId              string `json:"jxb_id"`
+	Jxbmc              string `json:"jxbmc"`
+	Jxbrs              string `json:"jxbrs"`
+	Jxbzls             string `json:"jxbzls"`
+	Jxdd               string `json:"jxdd"`
+	Kch                string `json:"kch"`
+	KchId              string `json:"kch_id"`
+	Kcmc               string `json:"kcmc"`
+	Kklxdm             string `json:"kklxdm"`
+	Kklxmc             string `json:"kklxmc"`
+	Kklxpx             string `json:"kklxpx"`
+	Krrl               string `json:"krrl"`
+	Listnav            string `json:"listnav"`
+	LocaleKey          string `json:"localeKey"`
+	Month              string `json:"month"`
+	PageTotal          int    `json:"pageTotal"`
+	Pageable           bool   `json:"pageable"`
+	QueryModel         struct {
+		CurrentPage   int           `json:"currentPage"`
+		CurrentResult int           `json:"currentResult"`
+		EntityOrField bool          `json:"entityOrField"`
+		Limit         int           `json:"limit"`
+		Offset        int           `json:"offset"`
+		PageNo        int           `json:"pageNo"`
+		PageSize      int           `json:"pageSize"`
+		ShowCount     int           `json:"showCount"`
+		Sorts         []interface{} `json:"sorts"`
+		TotalCount    int           `json:"totalCount"`
+		TotalPage     int           `json:"totalPage"`
+		TotalResult   int           `json:"totalResult"`
+	} `json:"queryModel"`
+	Qz          string `json:"qz"`
+	Rangeable   bool   `json:"rangeable"`
+	Rlkz        string `json:"rlkz"`
+	Rlzlkz      string `json:"rlzlkz"`
+	Rwlx        string `json:"rwlx"`
+	Sfktk       string `json:"sfktk"`
+	Sfxkbj      string `json:"sfxkbj"`
+	Sksj        string `json:"sksj"`
+	Sxbj        string `json:"sxbj,omitempty"`
+	TKchId      string `json:"t_kch_id"`
+	Tktjrs      string `json:"tktjrs"`
+	TotalResult string `json:"totalResult"`
+	UserModel   struct {
+		Monitor    bool   `json:"monitor"`
+		RoleCount  int    `json:"roleCount"`
+		RoleKeys   string `json:"roleKeys"`
+		RoleValues string `json:"roleValues"`
+		Status     int    `json:"status"`
+		Usable     bool   `json:"usable"`
+	} `json:"userModel"`
+	Xf     string `json:"xf"`
+	Xkgz   string `json:"xkgz"`
+	XkkzId string `json:"xkkz_id"`
+	Xxkbj  string `json:"xxkbj"`
+	Year   string `json:"year"`
+	Yxzrs  string `json:"yxzrs"`
+	Zckz   string `json:"zckz"`
+	Zixf   string `json:"zixf"`
+	Zntgpk string `json:"zntgpk"`
+	Zy     string `json:"zy"`
+}
 
 type FindClassReq struct {
 	FilterList []string `form:"filter_list"`
@@ -126,19 +305,19 @@ type ChooseClassPrvReq struct {
 }
 
 type GetChosenCourseReq struct {
-	JgId   string `json:"jg_id"`
-	ZyhId  string `json:"zyh_id"`
-	NjdmId string `json:"njdm_id"`
-	ZyfxId string `json:"zyfx_id"`
-	BhId   string `json:"bh_id"`
-	Xz     string `json:"xz"`
-	Ccdm   string `json:"ccdm"`
-	Xkxnm  string `json:"xkxnm"`
-	Xkxqm  string `json:"xkxqm"`
-	Xkly   string `json:"xkly"`
+	JgId   string `form:"jg_id"`
+	ZyhId  string `form:"zyh_id"`
+	NjdmId string `form:"njdm_id"`
+	ZyfxId string `form:"zyfx_id"`
+	BhId   string `form:"bh_id"`
+	Xz     string `form:"xz"`
+	Ccdm   string `form:"ccdm"`
+	Xkxnm  string `form:"xkxnm"`
+	Xkxqm  string `form:"xkxqm"`
+	Xkly   string `form:"xkly"`
 }
 
-func (c *GetChosenCourseReq) makeForm() string {
+func (c *GetChosenCourseReq) MakeForm() string {
 	var builder strings.Builder
 	t := reflect.TypeOf(*c)
 	v := reflect.ValueOf(*c)
@@ -166,7 +345,7 @@ func MakeGetChosenClassReq(field map[string]string) *GetChosenCourseReq {
 	return &req
 }
 
-func (c *FindClassReq) makeForm() string {
+func (c *FindClassReq) MakeForm() string {
 	var builder strings.Builder
 	t := reflect.TypeOf(*c)
 	v := reflect.ValueOf(*c)
@@ -195,7 +374,7 @@ func (c *FindClassReq) makeForm() string {
 	return builder.String()
 }
 
-func (c *GetCourseDetailReq) makeForm() string {
+func (c *GetCourseDetailReq) MakeForm() string {
 	var builder strings.Builder
 	t := reflect.TypeOf(*c)
 	v := reflect.ValueOf(*c)
@@ -292,7 +471,7 @@ func MakeGetDisplayReq(field map[string]string) *GetDisplayReq {
 	return &req
 }
 
-func (c *GetDisplayReq) makeForm() string {
+func (c *GetDisplayReq) MakeForm() string {
 	var builder strings.Builder
 	t := reflect.TypeOf(*c)
 	v := reflect.ValueOf(*c)
@@ -305,7 +484,7 @@ func (c *GetDisplayReq) makeForm() string {
 	return builder.String()
 }
 
-func (c *ChooseClassPrvReq) makeForm() string {
+func (c *ChooseClassPrvReq) MakeForm() string {
 	var builder strings.Builder
 	t := reflect.TypeOf(*c)
 	v := reflect.ValueOf(*c)

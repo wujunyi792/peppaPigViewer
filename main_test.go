@@ -1,12 +1,42 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
+	"golang.org/x/time/rate"
 	"log"
+	"newJwCourseHelper/internal/core"
 	"strings"
 	"testing"
+	"time"
 )
+
+func TestNewModule(t *testing.T) {
+	res, err := core.LoginPW("", "")
+	if err != nil {
+		panic(err)
+	}
+	//res.PrintCourseChosenList()
+	res.SetTarget([]string{"(2022-2023-1)-A0104341-2"}).FindCourse().PrintFireCourseList()
+	courses, err := res.FireCourses()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(courses)
+}
+
+func TestRate(t *testing.T) {
+	r := rate.NewLimiter(rate.Every(1*time.Second), 10)
+	for {
+		err := r.Wait(context.Background())
+		if err != nil {
+			panic(err)
+			return
+		}
+		log.Println("getOne - ", r.Burst())
+	}
+}
 
 func TestParse(T *testing.T) {
 	body := `
@@ -540,9 +570,9 @@ http://blog.csdn.net/remote_roamer/article/details/14105999
 	})
 }
 
-func TestMakeForm(t *testing.T) {
-	form := FindClassReq{
-		FilterList: []string{"1", "2"},
-	}
-	println(form.makeForm())
-}
+//func TestMakeForm(t *testing.T) {
+//	form := FindClassReq{
+//		FilterList: []string{"1", "2"},
+//	}
+//	println(form.makeForm())
+//}

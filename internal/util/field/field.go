@@ -1,4 +1,4 @@
-package main
+package field
 
 import (
 	"github.com/PuerkitoBio/goquery"
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func getInputField(body string, old map[string]string) map[string]string {
+func GetInputField(body string, old map[string]string) map[string]string {
 	doc, err := goquery.NewDocumentFromReader(strings.NewReader(body))
 	if err != nil {
 		log.Fatal(err)
