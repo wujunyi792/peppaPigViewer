@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"newJwCourseHelper/internal/dto"
+	"strconv"
 )
 
 func (u *User) FindCourse() *User {
@@ -13,15 +14,15 @@ func (u *User) FindCourse() *User {
 		return u
 	}
 
-	findClassBaseField := dto.MakeFindClassReq(u.getField())
-	findClassBaseField.FilterList = u.getTarget()
-	list := u.getCourseList(findClassBaseField)
+	findClassBaseField := dto.MakeFindClassReq(u.getField())                      // 获取基本参数
+	findClassBaseField.FilterList = u.getTarget()                                 //获取目标课程号
+	list := u.getCourseList(findClassBaseField, u.info.special["firstKklxdmArr"]) //通过用户传过来的参数得到待选列表
 	getClassDetailField := dto.MakeGetClassDetailReq(u.getField())
 	for i := 0; i < len(list.TmpList); {
-		getClassDetailField.KchId = list.TmpList[i].KchId
+		getClassDetailField.KchId = list.TmpList[i].KchId //获取list中当前遍历元素的课程号
 		getClassDetailField.FilterList = u.getTarget()
 
-		details := u.getCourseDetail(getClassDetailField)
+		details := u.getCourseDetail(getClassDetailField, u.info.special)
 		if *details == nil {
 			id := list.TmpList[i].KchId
 			for j := 0; j < len(list.TmpList); j++ {
@@ -31,11 +32,14 @@ func (u *User) FindCourse() *User {
 			}
 			continue
 		}
+		var tempInt1, tempInt2 int
 		for index, detail := range *details {
 			for j := 0; j < len(list.TmpList); j++ {
 				if list.TmpList[j].JxbId == detail.JxbId {
 					list.TmpList[j].DetailList = &(*details)[index]
-					list.TmpList[j].HaveSet = list.TmpList[j].Yxzrs < (*details)[index].Jxbrl
+					tempInt1, _ = strconv.Atoi(list.TmpList[j].Yxzrs)
+					tempInt2, _ = strconv.Atoi((*details)[index].Jxbrl)
+					list.TmpList[j].HaveSet = tempInt1 < tempInt2 //bug!!!
 					i++
 					break
 				}

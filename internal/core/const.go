@@ -23,3 +23,5 @@ type JwApiHome string
 func (JwApiHome) GetString() string {
 	return "/xtgl/index_initMenu.html?jsdm=xs&_t=" + strconv.Itoa(int(time.Now().UnixMilli()))
 }
+
+const ClassNumber = 5

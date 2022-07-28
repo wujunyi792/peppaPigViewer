@@ -13,6 +13,7 @@ type baseInfo struct {
 	field        map[string]string
 	chosenCourse *[]dto.CourseChosenResp
 	baseQuery    string
+	special      map[string][]string
 }
 
 type missionConfig struct {
