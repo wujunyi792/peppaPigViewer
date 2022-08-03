@@ -30,8 +30,8 @@ func main() {
 		if e != nil {
 			panic(e)
 		}
-		res.PrintCourseChosenList()                                   //输出已选课程列表
-		res.SetTarget(user.Target).FindCourse().PrintFireCourseList() //输出待选课程列表
+		res.PrintCourseChosenList()                                                             //输出已选课程列表
+		res.SetTargetAndClass(user.Target, user.ClassNumber).FindCourse().PrintFireCourseList() //输出待选课程列表
 		courses, e := res.FireCourses()
 		if e != nil {
 			panic(err)
@@ -42,5 +42,5 @@ func main() {
 			fmt.Println(courses)
 		}
 	}
-	select {}
+	//select {}
 }

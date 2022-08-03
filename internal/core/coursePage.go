@@ -14,15 +14,15 @@ func (u *User) FindCourse() *User {
 		return u
 	}
 
-	findClassBaseField := dto.MakeFindClassReq(u.getField())                      // 获取基本参数
-	findClassBaseField.FilterList = u.getTarget()                                 //获取目标课程号
-	list := u.getCourseList(findClassBaseField, u.info.special["firstKklxdmArr"]) //通过用户传过来的参数得到待选列表
+	findClassBaseField := dto.MakeFindClassReq(u.getField())                                            // 获取基本参数
+	findClassBaseField.FilterList = u.getTarget()                                                       //获取目标课程号
+	list := u.getCourseList(findClassBaseField, u.info.special["firstKklxdmArr"], u.config.classNumber) //通过用户传过来的参数得到待选列表，这里可以根据classNumber选取特点大类的课程
 	getClassDetailField := dto.MakeGetClassDetailReq(u.getField())
 	for i := 0; i < len(list.TmpList); {
 		getClassDetailField.KchId = list.TmpList[i].KchId //获取list中当前遍历元素的课程号
 		getClassDetailField.FilterList = u.getTarget()
 
-		details := u.getCourseDetail(getClassDetailField, u.info.special)
+		details := u.getCourseDetail(getClassDetailField, u.info.special, u.config.classNumber) //获取课程详情
 		if *details == nil {
 			id := list.TmpList[i].KchId
 			for j := 0; j < len(list.TmpList); j++ {

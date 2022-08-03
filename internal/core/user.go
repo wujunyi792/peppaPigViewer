@@ -38,8 +38,9 @@ func (u *User) getBaseQuery() string {
 	return u.info.baseQuery
 }
 
-func (u *User) SetTarget(r []string) *User {
-	u.config.target = r
+func (u *User) SetTargetAndClass(r1 []string, r2 []string) *User {
+	u.config.target = r1
+	u.config.classNumber = r2
 	u.e = nil
 	return u
 }

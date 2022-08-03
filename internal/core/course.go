@@ -4,6 +4,7 @@ import (
 	"github.com/pkg/errors"
 	"log"
 	"newJwCourseHelper/internal/dto"
+	"strconv"
 )
 
 func (u *User) getChosenCourse(form *dto.GetChosenCourseReq) *[]dto.CourseChosenResp {
@@ -40,57 +41,60 @@ func (u *User) getDisplayPage(form *dto.GetDisplayReq) string {
 	return body.(string)
 }
 
-func (u *User) getCourseList(form *dto.FindClassReq, KklxdmArr []string) *dto.CourseListResp { //KklxdmArr表示不同种类课程的Kklxdm代码
+func (u *User) getCourseList(form *dto.FindClassReq, KklxdmArr []string, classNumber []string) *dto.CourseListResp { //KklxdmArr表示不同种类课程的Kklxdm代码
 	var res, tempRes dto.CourseListResp
 
 	var err error
-	for _, kklxdm := range KklxdmArr {
-		form.Kklxdm = kklxdm
-		_, err = u.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"). //设置多次查询
-															SetResult(&tempRes).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseList + u.getBaseQuery())
-		if err != nil {
-			log.Println(err)
-			return nil
-		}
-		res.TmpList = append(res.TmpList, tempRes.TmpList...)
+	//for _, kklxdm := range KklxdmArr {
+	tempInt, _ := strconv.Atoi(classNumber[0]) //这边暂时设定classNumber只能有一个值且一定为整数：[0,2]
+	form.Kklxdm = KklxdmArr[tempInt]
+	_, err = u.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"). //设置多次查询
+														SetResult(&tempRes).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseList + u.getBaseQuery())
+	if err != nil {
+		log.Println(err)
+		return nil
 	}
+	res.TmpList = append(res.TmpList, tempRes.TmpList...)
+	//}
 	return &res
 }
 
-func (u *User) getCourseDetail(form *dto.GetCourseDetailReq, special map[string][]string) *[]dto.CourseDetail {
+func (u *User) getCourseDetail(form *dto.GetCourseDetailReq, special map[string][]string, classNumber []string) *[]dto.CourseDetail {
 	var res, tempArr []dto.CourseDetail
 	var err error
-	for i := 0; i < ClassNumber; i++ {
-		form.Kklxdm = special["firstKklxdmArr"][i]
-		form.XkkzId = special["firstXkkzIdArr"][i]
-		form.NjdmId = special["firstNjdmIdArr"][i]
-		form.ZyhId = special["firstZyhIdArr"][i]
-		if i == 0 {
-			form.Rwlx = "1"
-			form.Sfkknj = "1"
-			form.Sfkkzy = "1"
-			form.Xkxskcgskg = "0"
-		} else if i == 1 {
-			form.Rwlx = "2"
-			form.Sfkknj = "0"
-			form.Sfkkzy = "0"
-			form.Xkxskcgskg = "1"
-		} else {
-			form.Rwlx = "2"
-			form.Sfkknj = "0"
-			form.Sfkkzy = "0"
-			form.Xkxskcgskg = "0"
-		}
 
-		_, err = u.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8").
-			SetResult(&tempArr).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseDetail + u.getBaseQuery()) //这里只能获取每一个大类中的第一个课程，所以在config.json中需要填写的是课程代码以保证唯一性
-		if err != nil {
-			log.Println(err)
-			return nil
-		}
-		res = append(res, tempArr...) //TODO: 可能出现重复的课程
-
+	//for i := 0; i < ClassNumber; i++ {
+	i, _ := strconv.Atoi(classNumber[0]) //这边暂时设定classNumber只能有一个值且一定为整数：[0,2]
+	form.Kklxdm = special["firstKklxdmArr"][i]
+	form.XkkzId = special["firstXkkzIdArr"][i]
+	form.NjdmId = special["firstNjdmIdArr"][i]
+	form.ZyhId = special["firstZyhIdArr"][i]
+	if i == 0 {
+		form.Rwlx = "1"
+		form.Sfkknj = "1"
+		form.Sfkkzy = "1"
+		form.Xkxskcgskg = "0"
+	} else if i == 1 {
+		form.Rwlx = "2"
+		form.Sfkknj = "0"
+		form.Sfkkzy = "0"
+		form.Xkxskcgskg = "1"
+	} else {
+		form.Rwlx = "2"
+		form.Sfkknj = "0"
+		form.Sfkkzy = "0"
+		form.Xkxskcgskg = "0"
 	}
+
+	_, err = u.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8").
+		SetResult(&tempArr).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseDetail + u.getBaseQuery()) //这里只能获取每一个大类中的第一个课程，所以在config.json中需要填写的是课程代码以保证唯一性
+	if err != nil {
+		log.Println(err)
+		return nil
+	}
+	res = append(res, tempArr...) //TODO: 可能出现重复的课程
+
+	//}
 	return &res
 }
 

@@ -17,11 +17,12 @@ type baseInfo struct {
 }
 
 type missionConfig struct {
-	target     []string
-	errTag     []string
-	bucketFull int
-	rate       int
-	ua         string
+	target      []string
+	classNumber []string
+	errTag      []string
+	bucketFull  int
+	rate        int
+	ua          string
 }
 
 type User struct {
