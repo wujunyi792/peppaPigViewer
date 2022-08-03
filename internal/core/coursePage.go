@@ -39,7 +39,7 @@ func (u *User) FindCourse() *User {
 					list.TmpList[j].DetailList = &(*details)[index]
 					tempInt1, _ = strconv.Atoi(list.TmpList[j].Yxzrs)
 					tempInt2, _ = strconv.Atoi((*details)[index].Jxbrl)
-					list.TmpList[j].HaveSet = tempInt1 < tempInt2 //bug!!!
+					list.TmpList[j].HaveSet = tempInt1 < tempInt2
 					i++
 					break
 				}

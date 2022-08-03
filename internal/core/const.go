@@ -24,4 +24,4 @@ func (JwApiHome) GetString() string {
 	return "/xtgl/index_initMenu.html?jsdm=xs&_t=" + strconv.Itoa(int(time.Now().UnixMilli()))
 }
 
-const ClassNumber = 5
+const ClassNumber = 3 //暂时不加入特殊课程和重修课程(可能会导致出现重复课程然后就会有bug）

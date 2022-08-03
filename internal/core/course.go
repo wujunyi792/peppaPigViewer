@@ -88,7 +88,7 @@ func (u *User) getCourseDetail(form *dto.GetCourseDetailReq, special map[string]
 			log.Println(err)
 			return nil
 		}
-		res = append(res, tempArr...)
+		res = append(res, tempArr...) //TODO: 可能出现重复的课程
 
 	}
 	return &res
