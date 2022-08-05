@@ -4,9 +4,12 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/robfig/cron"
 	"io/ioutil"
 	"newJwCourseHelper/internal/config"
 	"newJwCourseHelper/internal/core"
+	"strconv"
+	"time"
 )
 
 var configFile = flag.String("f", "config.json", "Specify the config file")
@@ -30,17 +33,31 @@ func main() {
 		if e != nil {
 			panic(e)
 		}
-		res.PrintCourseChosenList()                                                             //输出已选课程列表
-		res.SetTargetAndClass(user.Target, user.ClassNumber).FindCourse().PrintFireCourseList() //输出待选课程列表
-		courses, e := res.FireCourses()
-		if e != nil {
-			panic(err)
-		}
-		if len(courses) == 0 {
-			fmt.Println("暂时无课程")
-		} else {
-			fmt.Println(courses)
-		}
+		res.PrintCourseChosenList()                                   //输出已选课程列表
+		res.SetTarget(user.Target).FindCourse().PrintFireCourseList() //输出待选课程列表//继续debug，把cofig文件对应的结构体数组修改好
+
+		timer := cron.New()
+		err := timer.AddFunc("*/"+strconv.Itoa(user.Interval)+" * * * * *", func() {
+			courses, e := res.FindCourse().FireCourses()
+			if e != nil {
+				panic(err)
+			}
+			if len(courses) == 0 {
+				fmt.Println("暂时无可选课程")
+			} else {
+				fmt.Println("已选到如下课程：")
+				fmt.Println(courses)
+			}
+		})
+		go timer.Start()
+		defer timer.Stop()
+		if err != nil {
+			fmt.Println("function Error!")
+		} //每3秒打印一次已选课程列表
+
 	}
-	//select {}
+	select {
+	case <-time.After(time.Second * 1000):
+		return
+	}
 }

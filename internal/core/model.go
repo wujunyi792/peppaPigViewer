@@ -17,12 +17,16 @@ type baseInfo struct {
 }
 
 type missionConfig struct {
-	target      []string
-	classNumber []string
-	errTag      []string
-	bucketFull  int
-	rate        int
-	ua          string
+	target     []Target
+	errTag     []string
+	bucketFull int
+	rate       int
+	ua         string
+}
+
+type Target struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
 }
 
 type User struct {

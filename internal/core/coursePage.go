@@ -14,17 +14,27 @@ func (u *User) FindCourse() *User {
 		return u
 	}
 
-	findClassBaseField := dto.MakeFindClassReq(u.getField())                                            // 获取基本参数
-	findClassBaseField.FilterList = u.getTarget()                                                       //获取目标课程号
-	list := u.getCourseList(findClassBaseField, u.info.special["firstKklxdmArr"], u.config.classNumber) //通过用户传过来的参数得到待选列表，这里可以根据classNumber选取特点大类的课程
+	findClassBaseField := dto.MakeFindClassReq(u.getField()) // 获取基本参数
+	for _, target := range u.getTarget() {
+		findClassBaseField.FilterList = append(findClassBaseField.FilterList, target.Name) //获取目标课程号
+	}
+	//这里的eachLen是每个课程的课程号搜索后的个数，可以防止后续搜索出现冗余
+	list, eachLen := u.getCourseList(findClassBaseField, u.info.special["firstKklxdmArr"], u.config.target) //通过用户传过来的参数得到待选列表，这里可以查询到不同大类的课程
 	getClassDetailField := dto.MakeGetClassDetailReq(u.getField())
+	tempSum := eachLen[0]
+	j := 0
 	for i := 0; i < len(list.TmpList); {
-		getClassDetailField.KchId = list.TmpList[i].KchId //获取list中当前遍历元素的课程号
-		getClassDetailField.FilterList = u.getTarget()
-
-		details := u.getCourseDetail(getClassDetailField, u.info.special, u.config.classNumber) //获取课程详情
+		if i == tempSum {
+			j++
+			tempSum += eachLen[j]
+		}
+		getClassDetailField.KchId = list.TmpList[tempSum-1].KchId //获取list中当前遍历元素的课程号
+		for _, target := range u.getTarget() {
+			getClassDetailField.FilterList = append(getClassDetailField.FilterList, target.Name) //获取目标课程号
+		}
+		details := u.getCourseDetail(getClassDetailField, u.info.special, u.config.target[j].Type) //获取课程详情
 		if *details == nil {
-			id := list.TmpList[i].KchId
+			id := list.TmpList[tempSum-1].KchId
 			for j := 0; j < len(list.TmpList); j++ {
 				if list.TmpList[j].KchId == id {
 					i++
