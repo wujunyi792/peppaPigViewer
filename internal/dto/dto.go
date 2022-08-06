@@ -403,7 +403,7 @@ func (c *GetCourseDetailReq) MakeForm() string {
 	return builder.String()
 }
 
-func MakeFindClassReq(field map[string]string) *FindClassReq {
+func MakeFindClassReq(field map[string]string) *FindClassReq { //获取基本参数
 	var req FindClassReq
 	t := reflect.TypeOf(req)
 	v := reflect.ValueOf(&req)
@@ -416,7 +416,8 @@ func MakeFindClassReq(field map[string]string) *FindClassReq {
 	}
 	req.Kspage = "1"
 	req.Jspage = "10"
-	req.Kklxdm = field["firstKklxdm"]
+	req.Kklxdm = field["firstKklxdm"] //修改
+	//req.Kklxdm = "10"
 	req.Jg_id = field["jg_id_1"]
 	return &req
 }
@@ -432,7 +433,8 @@ func MakeChooseClassPrvReq(field map[string]string) *ChooseClassPrvReq {
 		}
 		v.Field(k).SetString(field[t.Field(k).Tag.Get("form")])
 	}
-	req.Kklxdm = field["firstKklxdm"]
+	req.Kklxdm = field["firstKklxdm"] //修改
+	//req.Kklxdm = "10"
 	req.XkkzId = field["firstXkkzId"]
 	req.Qz = "0"
 	if req.Rlzlkz == "1" || req.Rlkz == "1" {
@@ -452,9 +454,10 @@ func MakeGetClassDetailReq(field map[string]string) *GetCourseDetailReq {
 		if v.Field(k).Type().Kind() != reflect.String {
 			continue
 		}
-		v.Field(k).SetString(field[t.Field(k).Tag.Get("form")])
+		v.Field(k).SetString(field[t.Field(k).Tag.Get("form")]) //根据预设的键值获取field中对应标签id的值
 	}
-	req.Kklxdm = field["firstKklxdm"]
+	req.Kklxdm = field["firstKklxdm"] //修改
+	//req.Kklxdm = "10"
 	req.XkkzId = field["firstXkkzId"]
 	req.JgId = field["jg_id_1"]
 	req.Cxbj = "0"

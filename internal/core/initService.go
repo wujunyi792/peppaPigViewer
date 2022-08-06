@@ -5,9 +5,10 @@ import (
 	"net/url"
 	"newJwCourseHelper/internal/dto"
 	"newJwCourseHelper/internal/util/field"
+	"newJwCourseHelper/internal/util/idArr"
 )
 
-func (u *User) serviceInit() error {
+func (u *User) serviceInit() error { //TODO:在初始化函数中将其他的firstXkkzId、firstNjdmId、firstZyhId等初始化
 	e := u.getEntranceList()
 	reqUrl := url.URL{
 		Scheme: "https",
@@ -38,8 +39,9 @@ func (u *User) serviceInit() error {
 	baseQuery.Add("su", u.getStaffId())
 	u.info.baseQuery = baseQuery.Encode()
 
-	p := u.getCoursePage(reqUrl.String())
+	p := u.getCoursePage(reqUrl.String()) //获取到了课程页面的源代码，可以在这里添加加入其他课程组的XkkzId等
 	u.info.field = field.GetInputField(p, nil)
+	u.info.special = idArr.FindIDArr(p, ClassNumber) //修改
 
 	p = u.getDisplayPage(dto.MakeGetDisplayReq(u.getField()))
 	u.info.field = field.GetInputField(p, u.getField())

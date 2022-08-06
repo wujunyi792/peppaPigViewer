@@ -38,12 +38,17 @@ func (u *User) getBaseQuery() string {
 	return u.info.baseQuery
 }
 
-func (u *User) SetTarget(r []string) *User {
-	u.config.target = r
+func (u *User) SetTarget(r []struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
+}) *User {
+	for _, target := range r {
+		u.config.target = append(u.config.target, target)
+	}
 	u.e = nil
 	return u
 }
 
-func (u *User) getTarget() []string {
+func (u *User) getTarget() []Target {
 	return u.config.target
 }
