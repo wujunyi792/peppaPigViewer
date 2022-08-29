@@ -63,15 +63,15 @@ func (u *User) FindCourse() *User {
 }
 
 // PrintFireCourseList 输出待选课的列表
-func (u *User) PrintFireCourseList() {
+func (u *User) PrintFireCourseList() *User {
 	if u.Error() != nil {
 		log.Printf("find an err: %v\n", u.Error())
-		return
+		return u
 	}
 	if u.courses == nil {
 		u.e = errors.New("empty course list, please use FindCourse first")
 		log.Printf("find an err: %v\n", u.Error())
-		return
+		return u
 	}
 	for i := 0; i < len(u.courses.TmpList) && u.courses.TmpList[i].DetailList != nil; i++ {
 		fmt.Printf("【%02d】 %s 课程号 %s 班级号 %s    总容量 %s 已选 %s\n",
@@ -82,6 +82,7 @@ func (u *User) PrintFireCourseList() {
 			(*u.courses.TmpList[i].DetailList).Jxbrl,
 			u.courses.TmpList[i].Yxzrs)
 	}
+	return u
 }
 
 func (u *User) FireCourses() ([]string, error) {

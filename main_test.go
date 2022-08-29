@@ -7,32 +7,30 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"golang.org/x/time/rate"
 	"log"
-	"newJwCourseHelper/internal/config"
-	"newJwCourseHelper/internal/core"
 	"strings"
 	"testing"
 	"time"
 )
 
-func TestNewModule(t *testing.T) {
-	res, err := core.LoadConfig(config.Config{
-		Target:     []string{},
-		ErrTag:     []string{},
-		BucketFull: 5,
-		Rate:       3,
-		Ua:         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
-	}).LoginPW("", "")
-	if err != nil {
-		panic(err)
-	}
-	//res.PrintCourseChosenList()
-	res.SetTarget([]string{"(2022-2023-1)-A0104341-2"}).FindCourse().PrintFireCourseList()
-	courses, err := res.FireCourses()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(courses)
-}
+//func TestNewModule(t *testing.T) {
+//	res, err := core.LoadConfig(config.Config{
+//		Target:     []string{},
+//		ErrTag:     []string{},
+//		BucketFull: 5,
+//		Rate:       3,
+//		Ua:         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+//	}).LoginPW("", "")
+//	if err != nil {
+//		panic(err)
+//	}
+//	//res.PrintCourseChosenList()
+//	res.SetTarget([]string{"(2022-2023-1)-A0104341-2"}).FindCourse().PrintFireCourseList()
+//	courses, err := res.FireCourses()
+//	if err != nil {
+//		panic(err)
+//	}
+//	fmt.Println(courses)
+//}
 
 func TestRate(t *testing.T) {
 	r := rate.NewLimiter(rate.Every(1*time.Second), 10)

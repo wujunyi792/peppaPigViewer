@@ -5,11 +5,12 @@ import (
 	"flag"
 	"fmt"
 	"github.com/robfig/cron"
-	"io/ioutil"
 	"newJwCourseHelper/internal/config"
 	"newJwCourseHelper/internal/core"
+	"os"
+	"os/signal"
 	"strconv"
-	"time"
+	"syscall"
 )
 
 var configFile = flag.String("f", "config.json", "Specify the config file")
@@ -17,8 +18,9 @@ var configFile = flag.String("f", "config.json", "Specify the config file")
 func main() {
 	flag.Parse()
 	var c []config.Config
+	var users []*core.User
 
-	content, err := ioutil.ReadFile(*configFile)
+	content, err := os.ReadFile(*configFile)
 	if err != nil {
 		panic(err)
 	}
@@ -34,11 +36,11 @@ func main() {
 			panic(e)
 		}
 		res.PrintCourseChosenList()                                   //输出已选课程列表
-		res.SetTarget(user.Target).FindCourse().PrintFireCourseList() //输出待选课程列表//继续debug，把cofig文件对应的结构体数组修改好
+		res.SetTarget(user.Target).FindCourse().PrintFireCourseList() //输出待选课程列表//继续debug，把config文件对应的结构体数组修改好
 
-		timer := cron.New()
-		err := timer.AddFunc("*/"+strconv.Itoa(user.Interval)+" * * * * *", func() {
-			courses, e := res.FindCourse().FireCourses()
+		res.SetCorn(cron.New())
+		err := res.GetCorn().AddFunc("*/"+strconv.Itoa(user.Interval)+" * * * * *", func() {
+			courses, e := res.FindCourse().PrintFireCourseList().FireCourses()
 			if e != nil {
 				panic(err)
 			}
@@ -49,15 +51,21 @@ func main() {
 				fmt.Println(courses)
 			}
 		})
-		go timer.Start()
-		defer timer.Stop()
 		if err != nil {
-			fmt.Println("function Error!")
-		} //每3秒打印一次已选课程列表
-
+			fmt.Printf("用户 %s 定时任务添加失败: %v", user.User.StaffId, err)
+		}
+		users = append(users, res)
 	}
-	select {
-	case <-time.After(time.Second * 1000):
-		return
+
+	for i := 0; i < len(users); i++ {
+		users[i].GetCorn().Start()
+	}
+
+	quit := make(chan os.Signal)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+
+	for i := 0; i < len(users); i++ {
+		users[i].GetCorn().Stop()
 	}
 }

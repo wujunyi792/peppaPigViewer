@@ -31,12 +31,12 @@ func LoadConfig(c config.Config) *User {
 		c.BucketFull = 10
 	}
 	u := new(User)
-	tempTargetArr := make([]Target, 0)
+	targetArr := make([]Target, 0)
 	for _, each := range c.Target {
-		tempTargetArr = append(tempTargetArr, Target{Name: each.Name, Type: each.Type})
+		targetArr = append(targetArr, Target{Name: each.Name, Type: each.Type})
 	}
 	u.config = &missionConfig{
-		target:     tempTargetArr,
+		target:     targetArr,
 		errTag:     c.ErrTag,
 		bucketFull: c.BucketFull,
 		rate:       c.Rate,

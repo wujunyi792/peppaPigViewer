@@ -3,6 +3,7 @@ package core
 import (
 	"github.com/go-resty/resty/v2"
 	"github.com/patrickmn/go-cache"
+	"github.com/robfig/cron"
 	cas "github.com/wujunyi792/hdu-cas-helper"
 	"golang.org/x/time/rate"
 	"newJwCourseHelper/internal/dto"
@@ -37,6 +38,8 @@ type User struct {
 	config     *missionConfig
 	client     *resty.Client
 	cache      *cache.Cache
+
+	cron *cron.Cron
 
 	courses *dto.CourseListResp
 
