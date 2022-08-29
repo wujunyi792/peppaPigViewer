@@ -74,7 +74,7 @@ func (u *User) PrintFireCourseList() *User {
 		return u
 	}
 	for i := 0; i < len(u.courses.TmpList) && u.courses.TmpList[i].DetailList != nil; i++ {
-		fmt.Printf("【%02d】 %s 课程号 %s 班级号 %s    总容量 %s 已选 %s\n",
+		log.Printf("【%02d】 %s 课程号 %s 班级号 %s    总容量 %s 已选 %s\n",
 			i+1,
 			u.courses.TmpList[i].Kcmc,
 			u.courses.TmpList[i].Kch,

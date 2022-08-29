@@ -40,16 +40,7 @@ func main() {
 
 		res.SetCorn(cron.New())
 		err := res.GetCorn().AddFunc("*/"+strconv.Itoa(user.Interval)+" * * * * *", func() {
-			courses, e := res.FindCourse().PrintFireCourseList().FireCourses()
-			if e != nil {
-				panic(err)
-			}
-			if len(courses) == 0 {
-				fmt.Println("暂时无可选课程")
-			} else {
-				fmt.Println("已选到如下课程：")
-				fmt.Println(courses)
-			}
+			core.Job(res)
 		})
 		if err != nil {
 			fmt.Printf("用户 %s 定时任务添加失败: %v", user.User.StaffId, err)
