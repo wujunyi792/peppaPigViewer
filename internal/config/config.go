@@ -10,13 +10,12 @@ type Config struct {
 
 	Target []struct {
 		Name string `json:"name"`
-		Type string `json:"type"`
+		Type int    `json:"type"`
 	} `json:"target"`
 	//ClassNumber []string `json:"classNumber"`
-	ErrTag     []string `json:"errTag"`
-	BucketFull int      `json:"bucketFull"`
-	Rate       int      `json:"rate"`
-	Ua         string   `json:"ua"`
+	ErrTag []string `json:"errTag"`
+	Rate   int      `json:"rate"`
+	Ua     string   `json:"ua"`
 
 	Interval int `json:"interval"`
 }

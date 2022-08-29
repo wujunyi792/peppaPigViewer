@@ -24,11 +24,8 @@ func LoadConfig(c config.Config) *User {
 	if c.Ua == "" {
 		c.Ua = ua.GetUA()
 	}
-	if c.Rate < 1 {
-		c.Rate = 3
-	}
-	if c.BucketFull > 10 {
-		c.BucketFull = 10
+	if c.Rate < 500 {
+		c.Rate = 500
 	}
 	u := new(User)
 	targetArr := make([]Target, 0)
@@ -36,11 +33,10 @@ func LoadConfig(c config.Config) *User {
 		targetArr = append(targetArr, Target{Name: each.Name, Type: each.Type})
 	}
 	u.config = &missionConfig{
-		target:     targetArr,
-		errTag:     c.ErrTag,
-		bucketFull: c.BucketFull,
-		rate:       c.Rate,
-		ua:         c.Ua,
+		target: targetArr,
+		errTag: c.ErrTag,
+		rate:   c.Rate,
+		ua:     c.Ua,
 	}
 	return u
 }

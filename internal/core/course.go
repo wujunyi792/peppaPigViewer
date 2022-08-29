@@ -4,7 +4,6 @@ import (
 	"github.com/pkg/errors"
 	"log"
 	"newJwCourseHelper/internal/dto"
-	"strconv"
 )
 
 func (u *User) getChosenCourse(form *dto.GetChosenCourseReq) *[]dto.CourseChosenResp {
@@ -41,44 +40,58 @@ func (u *User) getDisplayPage(form *dto.GetDisplayReq) string {
 	return body.(string)
 }
 
-func (u *User) getCourseList(form *dto.FindClassReq, KklxdmArr []string, targetArr []Target) (*dto.CourseListResp, []int) { //KklxdmArr表示不同种类课程的Kklxdm代码
+func (u *User) getCourseList(form *dto.FindClassReq, targetArr []Target) *dto.CourseListResp { //KklxdmArr表示不同种类课程的Kklxdm代码
 	var res, tempRes dto.CourseListResp
-	var eachLen []int
+	classTypeMap := make(map[int][]Target)
+	for i := 0; i < 3; i++ {
+		classTypeMap[i] = make([]Target, 0)
+	}
 
-	var err error
-	tempFilterList := form.FilterList
-	for i, eachTarget := range targetArr {
-		tempInt, _ := strconv.Atoi(eachTarget.Type) //这边暂时设定classNumber只能有一个值且一定为整数：[0,2]
-		form.Kklxdm = KklxdmArr[tempInt]
-		form.FilterList = []string{tempFilterList[i]}                                                       //防止有的target使用错误的参数进行查询(这里要保证targetArr和form.FilterList的长度一致)
-		_, err = u.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"). //设置多次查询
-															SetResult(&tempRes).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseList + u.getBaseQuery())
+	for i := 0; i < len(targetArr); i++ {
+		classTypeMap[targetArr[i].Type] = append(classTypeMap[targetArr[i].Type], targetArr[i])
+	}
+
+	for key, value := range classTypeMap {
+		if len(value) == 0 {
+			delete(classTypeMap, key)
+		}
+	}
+
+	for classType, targets := range classTypeMap {
+		form.Kklxdm = u.info.special["firstKklxdmArr"][classType]
+		form.FilterList = []string{}
+		for _, target := range targets {
+			form.FilterList = append(form.FilterList, target.Name)
+		}
+		_, err := u.client.R().
+			SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"). //设置多次查询
+			SetResult(&tempRes).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseList + u.getBaseQuery())
 		if err != nil {
 			log.Println(err)
-			return nil, []int{}
+			return nil
+		}
+		for i := 0; i < len(tempRes.TmpList); i++ {
+			tempRes.TmpList[i].ClassType = classType
 		}
 		res.TmpList = append(res.TmpList, tempRes.TmpList...)
-		eachLen = append(eachLen, len(tempRes.TmpList))
 	}
-	return &res, eachLen
+	return &res
 }
 
-func (u *User) getCourseDetail(form *dto.GetCourseDetailReq, special map[string][]string, classNumber string) *[]dto.CourseDetail {
+func (u *User) getCourseDetail(form *dto.GetCourseDetailReq, classType int) *[]dto.CourseDetail {
 	var res, tempArr []dto.CourseDetail
 	var err error
 
-	//for _, eachTarget := range targetArr {
-	i, _ := strconv.Atoi(classNumber) //这边暂时设定classNumber只能有一个值且一定为整数：[0,2]
-	form.Kklxdm = special["firstKklxdmArr"][i]
-	form.XkkzId = special["firstXkkzIdArr"][i]
-	form.NjdmId = special["firstNjdmIdArr"][i]
-	form.ZyhId = special["firstZyhIdArr"][i]
-	if i == 0 {
+	form.Kklxdm = u.info.special["firstKklxdmArr"][classType]
+	form.XkkzId = u.info.special["firstXkkzIdArr"][classType]
+	form.NjdmId = u.info.special["firstNjdmIdArr"][classType]
+	form.ZyhId = u.info.special["firstZyhIdArr"][classType]
+	if classType == 0 {
 		form.Rwlx = "1"
 		form.Sfkknj = "1"
 		form.Sfkkzy = "1"
 		form.Xkxskcgskg = "0"
-	} else if i == 1 {
+	} else if classType == 1 {
 		form.Rwlx = "2"
 		form.Sfkknj = "0"
 		form.Sfkkzy = "0"

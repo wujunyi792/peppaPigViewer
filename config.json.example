@@ -6,8 +6,7 @@
     },
     "target": [],
     "errTag": [],
-    "bucketFull": 0,
-    "rate": 0,
+    "rate": 500,
     "ua": "",
     "interval": 0
   }

@@ -1,7 +1,6 @@
 package core
 
 import (
-	"context"
 	"github.com/go-resty/resty/v2"
 	"github.com/pkg/errors"
 	"log"
@@ -22,8 +21,8 @@ func (u *User) newRequestClient() *resty.Client {
 		}
 		log.Printf("【Req】 %s", request.URL)
 
-		err := u.getRequestRate().Wait(context.Background())
-		return err
+		<-u.getRequestTicket().C
+		return nil
 	})
 	client.OnAfterResponse(func(c *resty.Client, r *resty.Response) error {
 		if r.StatusCode() != 200 {

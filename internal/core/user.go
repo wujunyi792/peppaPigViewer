@@ -2,7 +2,6 @@ package core
 
 import (
 	"github.com/patrickmn/go-cache"
-	"golang.org/x/time/rate"
 	"time"
 )
 
@@ -13,14 +12,14 @@ func (u *User) getCookie() string {
 	return u.auth.GetCookie()
 }
 
-func (u *User) getRequestRate() *rate.Limiter {
-	return u.rateBucket
+func (u *User) getRequestTicket() *time.Ticker {
+	return u.requestTicket
 }
 
 func (u *User) init() {
 	u.formParam = make(map[string]string, 10)
 	u.info = new(baseInfo)
-	u.rateBucket = rate.NewLimiter(rate.Every(time.Duration(u.config.rate)*time.Second), u.config.bucketFull)
+	u.requestTicket = time.NewTicker(time.Duration(u.config.rate) * time.Millisecond)
 	u.config = new(missionConfig)
 	u.cache = cache.New(1*time.Hour, 24*time.Hour)
 	u.client = u.newRequestClient()
@@ -40,9 +39,12 @@ func (u *User) getBaseQuery() string {
 
 func (u *User) SetTarget(r []struct {
 	Name string `json:"name"`
-	Type string `json:"type"`
+	Type int    `json:"type"`
 }) *User {
 	for _, target := range r {
+		if target.Type > 2 || target.Type < 0 {
+			panic("请检查课程类型是否正确")
+		}
 		u.config.target = append(u.config.target, target)
 	}
 	u.e = nil
@@ -51,4 +53,13 @@ func (u *User) SetTarget(r []struct {
 
 func (u *User) getTarget() []Target {
 	return u.config.target
+}
+
+func (u *User) removeTarget(name string) {
+	for index, target := range u.config.target {
+		if target.Name == name {
+			u.config.target = append(u.config.target[:index], u.config.target[index+1:]...)
+			break
+		}
+	}
 }

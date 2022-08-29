@@ -35,8 +35,8 @@ func main() {
 		if e != nil {
 			panic(e)
 		}
-		res.PrintCourseChosenList()                                   //输出已选课程列表
-		res.SetTarget(user.Target).FindCourse().PrintFireCourseList() //输出待选课程列表//继续debug，把config文件对应的结构体数组修改好
+		//res.PrintCourseChosenList()                                   //输出已选课程列表
+		res.SetTarget(user.Target) //输出待选课程列表//继续debug，把config文件对应的结构体数组修改好
 
 		res.SetCorn(cron.New())
 		err := res.GetCorn().AddFunc("*/"+strconv.Itoa(user.Interval)+" * * * * *", func() {

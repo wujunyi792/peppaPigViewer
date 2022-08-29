@@ -61,7 +61,8 @@ type CourseListResp struct {
 		Year       string `json:"year"`
 		Yxzrs      string `json:"yxzrs"`
 		DetailList *CourseDetail
-		HaveSet    bool // 是否可选（余量充足）
+		HaveSet    bool `json:"-"` // 是否可选（余量充足）
+		ClassType  int  `json:"-"`
 	} `json:"tmpList"`
 	Sfxsjc string `json:"sfxsjc"`
 }
