@@ -20,6 +20,10 @@ func (u *User) FindCourse() *User {
 	}
 	//这里的eachLen是每个课程的课程号搜索后的个数，可以防止后续搜索出现冗余
 	list := u.getCourseList(findClassBaseField, u.config.target) //通过用户传过来的参数得到待选列表，这里可以查询到不同大类的课程
+	if list == nil {
+		u.e = errors.New("获取课程列表失败")
+		return u
+	}
 	getClassDetailField := dto.MakeGetClassDetailReq(u.getField())
 	for i := 0; i < len(list.TmpList); {
 		getClassDetailField.KchId = list.TmpList[i].KchId

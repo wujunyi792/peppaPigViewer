@@ -14,6 +14,7 @@ func (u *User) SetCorn(e *cron.Cron) {
 }
 
 func Job(user *User) {
+	user.e = nil
 	courses, e := user.FindCourse().PrintFireCourseList().FireCourses()
 	if e != nil {
 		log.Print(e)

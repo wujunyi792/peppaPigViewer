@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="update">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json.example" beforeDir="false" afterPath="$PROJECT_DIR$/config.json.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/course.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/course.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/core/coursePage.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/coursePage.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/dto.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/dto.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/core/cron.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/cron.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
