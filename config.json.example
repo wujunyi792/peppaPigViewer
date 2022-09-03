@@ -4,10 +4,13 @@
       "staffId": "",
       "password": ""
     },
-    "target": [],
+    "target": [{
+      "name": "(2022-2023-1)-B0666s-1",
+      "type": 0
+    }],
     "errTag": [],
     "rate": 500,
-    "ua": "",
-    "interval": 0
+    "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+    "interval": 20
   }
 ]
