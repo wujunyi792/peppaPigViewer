@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="clear err when mission restart">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="add doc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.json.example" beforeDir="false" afterPath="$PROJECT_DIR$/config.json.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/core/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +69,7 @@
       <recent name="D:\go_workspace\newJwCourseHelper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/doc" />
       <recent name="D:\go_workspace\newJwCourseHelper\internal\user" />
       <recent name="D:\go_workspace\newJwCourseHelper\internal" />
       <recent name="D:\go_workspace\newJwCourseHelper\internal\model" />
@@ -160,7 +159,8 @@
     <MESSAGE value="add readme" />
     <MESSAGE value="update" />
     <MESSAGE value="clear err when mission restart" />
-    <option name="LAST_COMMIT_MESSAGE" value="clear err when mission restart" />
+    <MESSAGE value="add doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="add doc" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

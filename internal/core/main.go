@@ -3,7 +3,6 @@ package core
 import (
 	cas "github.com/wujunyi792/hdu-cas-helper"
 	"newJwCourseHelper/internal/config"
-	"newJwCourseHelper/internal/util/ua"
 )
 
 func (u *User) LoginPW(username, password string) (*User, error) {
@@ -22,7 +21,7 @@ func (u *User) LoginPW(username, password string) (*User, error) {
 
 func LoadConfig(c config.Config) *User {
 	if c.Ua == "" {
-		c.Ua = ua.GetUA()
+		c.Ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
 	}
 	if c.Rate < 500 {
 		c.Rate = 500
