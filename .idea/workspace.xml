@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="remove useless pkg">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/util/ua/ua.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/util/idArr/idArr.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/util/idArr/idArr.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,14 +178,9 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$USER_HOME$/go/pkg/mod/github.com/wujunyi792/hdu-cas-helper@v1.0.0/passwordLogin.go</url>
-          <line>40</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/cmd/main.go</url>
-          <line>18</line>
-          <option name="timeStamp" value="12" />
+          <url>file://$PROJECT_DIR$/internal/core/coursePage.go</url>
+          <line>98</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

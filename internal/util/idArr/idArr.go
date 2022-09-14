@@ -16,7 +16,7 @@ func FindIDArr(body string, classNumber int) map[string][]string { //可以返�
 	reg2 := regexp.MustCompile(`'(?s:(.*?))'`)
 	//根据规则提取关键信息
 	result1 := reg1.FindAllStringSubmatch(body, -1)
-	if len(result1) != 5 || len(result1[0]) != 2 {
+	if len(result1) != 4 || len(result1[0]) != 2 {
 		fmt.Println("re错误!") //TODO:错误处理
 		return nil
 	}
