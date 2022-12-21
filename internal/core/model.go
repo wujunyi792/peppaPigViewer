@@ -5,6 +5,7 @@ import (
 	"github.com/patrickmn/go-cache"
 	"github.com/robfig/cron"
 	cas "github.com/wujunyi792/hdu-cas-helper"
+	"newJwCourseHelper/internal/config"
 	"newJwCourseHelper/internal/dto"
 	"time"
 )
@@ -30,7 +31,9 @@ type Target struct {
 }
 
 type User struct {
-	auth          *cas.NewJW
+	auth        *cas.NewJW
+	retryConfig *config.Config
+
 	formParam     map[string]string
 	info          *baseInfo
 	requestTicket *time.Ticker

@@ -31,6 +31,7 @@ func (u *User) FindCourse() *User {
 			getClassDetailField.FilterList = append(getClassDetailField.FilterList, target.Name) //获取目标课程号
 		}
 		details := u.getCourseDetail(getClassDetailField, list.TmpList[i].ClassType) //获取课程详情
+
 		if *details == nil {
 			id := list.TmpList[i].KchId
 			for j := 0; j < len(list.TmpList); j++ {

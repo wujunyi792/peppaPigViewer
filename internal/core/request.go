@@ -7,6 +7,10 @@ import (
 	"net/http"
 )
 
+var (
+	ERROR_NEED_RELOGIN = errors.New("需要重新登陆")
+)
+
 // newRequestClient 初始化请求客户端
 func (u *User) newRequestClient() *resty.Client {
 	client := resty.New()
@@ -26,6 +30,10 @@ func (u *User) newRequestClient() *resty.Client {
 	})
 	client.OnAfterResponse(func(c *resty.Client, r *resty.Response) error {
 		if r.StatusCode() != 200 {
+			if r.StatusCode() == 302 {
+				log.Printf("Request 302 get when %s %s", r.Request.Method, r.Request.URL)
+				return ERROR_NEED_RELOGIN
+			}
 			log.Printf("Request get a status code %d when %s %s", r.StatusCode(), r.Request.Method, r.Request.URL)
 		}
 		return nil

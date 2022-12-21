@@ -10,6 +10,7 @@ func (u *User) getChosenCourse(form *dto.GetChosenCourseReq) *[]dto.CourseChosen
 	var res []dto.CourseChosenResp
 	_, err := u.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8").
 		SetBody(form.MakeForm()).SetResult(&res).Post(JwBase + JwApiCourseChosen + u.getBaseQuery())
+	// warn: Patch There with Retry
 	if err != nil {
 		log.Println(err)
 		return nil
@@ -66,6 +67,7 @@ func (u *User) getCourseList(form *dto.FindClassReq, targetArr []Target) *dto.Co
 		_, err := u.client.R().
 			SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"). //设置多次查询
 			SetResult(&tempRes).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseList + u.getBaseQuery())
+		// force return nil
 		if err != nil {
 			log.Println(err)
 			return nil
@@ -105,9 +107,15 @@ func (u *User) getCourseDetail(form *dto.GetCourseDetailReq, classType int) *[]d
 
 	_, err = u.client.R().SetHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8").
 		SetResult(&tempArr).SetBody(form.MakeForm()).Post(JwBase + JwApiCourseDetail + u.getBaseQuery())
+	// warn: Patch There when need relogin.
+	// err = ERROR_NEED_RELOGIN
 	if err != nil {
 		log.Println(err)
-		return nil
+		u.e = err
+		if u.IsRetryAuth() {
+			u, _ = u.ForceRetryAuth()
+		}
+		return nil // Todo: return nil Will breakdown the program May need handle this
 	}
 	res = append(res, tempArr...)
 	//这里每次循环要删掉form.FilterList中的一个值，要不然之后的课程查不出来//TODO: 有冗余的过程

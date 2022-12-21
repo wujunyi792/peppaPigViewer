@@ -31,6 +31,8 @@ func LoadConfig(c config.Config) *User {
 	for _, each := range c.Target {
 		targetArr = append(targetArr, Target{Name: each.Name, Type: each.Type})
 	}
+	// Adding retry module config
+	u.retryConfig = &c
 	u.config = &missionConfig{
 		target: targetArr,
 		errTag: c.ErrTag,

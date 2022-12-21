@@ -1,12 +1,15 @@
 package config
 
+type User struct {
+	StaffId  string `json:"staffId"`
+	Password string `json:"password"`
+	//JSESSIONID string `json:"JSESSIONID"`
+	//Route      string `json:"route"`
+	IsAutoReAuth bool `json:"auto_auth"`
+}
+
 type Config struct {
-	User struct {
-		StaffId  string `json:"staffId"`
-		Password string `json:"password"`
-		//JSESSIONID string `json:"JSESSIONID"`
-		//Route      string `json:"route"`
-	} `json:"user"`
+	User User `json:"user"`
 
 	Target []struct {
 		Name string `json:"name"`
