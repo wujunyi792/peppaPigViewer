@@ -1,11 +1,8 @@
-#on:
-#  release:
-#    types: [created]
+
 name: Release
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [created]
 
 jobs:
   releases-matrix:
