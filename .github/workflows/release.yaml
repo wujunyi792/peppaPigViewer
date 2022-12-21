@@ -4,8 +4,8 @@
 name: Release
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
 
 jobs:
   releases-matrix:
