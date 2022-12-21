@@ -2,7 +2,8 @@
   {
     "user": {
       "staffId": "",
-      "password": ""
+      "password": "",
+      "auto_auth": true
     },
     "target": [{
       "name": "(2022-2023-1)-B0666s-1",
