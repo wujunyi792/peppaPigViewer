@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="update" />
+    <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +84,7 @@
       <recent name="D:\go_workspace\newJwCourseHelper\internal\model" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build newJwCourseHelper/cmd">
+  <component name="RunManager" selected="Go 构建.go build newJwCourseHelper/cmd">
     <configuration name="go build newJwCourseHelper/cmd" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="newJwCourseHelper" />
       <working_directory value="$PROJECT_DIR$" />
@@ -135,15 +138,6 @@
       <pattern value="^\QTestUA\E$" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Go Build.go build newJwCourseHelper/cmd" />
-        <item itemvalue="Go Test.TestNewModule in newJwCourseHelper" />
-        <item itemvalue="Go Test.TestUA in newJwCourseHelper" />
-        <item itemvalue="Go Test.TestRate in newJwCourseHelper" />
-        <item itemvalue="Go Test.TestLogin in newJwCourseHelper" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
