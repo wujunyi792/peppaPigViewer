@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="remove useless pkg">
-      <change afterPath="$PROJECT_DIR$/internal/core/retry.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/course.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/course.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/coursePage.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/coursePage.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/core/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/core/request.go" afterDir="false" />
-    </list>
+    <list default="true" id="eb5a154d-02c5-40b3-ab70-8d4a7a3b782a" name="Changes" comment="feat(retry): adding retry Auth to fix 302 Error" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,7 +157,8 @@
     <MESSAGE value="clear err when mission restart" />
     <MESSAGE value="add doc" />
     <MESSAGE value="remove useless pkg" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove useless pkg" />
+    <MESSAGE value="feat(retry): adding retry Auth to fix 302 Error" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(retry): adding retry Auth to fix 302 Error" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
