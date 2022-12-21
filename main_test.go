@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	browser "github.com/EDDYCJY/fake-useragent"
 	"github.com/PuerkitoBio/goquery"
 	"golang.org/x/time/rate"
 	"log"
@@ -582,9 +581,3 @@ http://blog.csdn.net/remote_roamer/article/details/14105999
 //	}
 //	println(form.makeForm())
 //}
-
-func TestUA(t *testing.T) {
-	for i := 0; i < 100; i++ {
-		println(browser.Random())
-	}
-}
