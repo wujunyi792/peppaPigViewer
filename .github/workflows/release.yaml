@@ -1,11 +1,8 @@
-#on:
-#  release:
-#    types: [created]
+
 name: Release
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   releases-matrix:
@@ -25,9 +22,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: wangyoucao577/go-release-action@v1.34
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.RELEASE_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           project_path: "./cmd"
           binary_name: "script"
-          extra_files: README.md
+          extra_files: README.md config.json.example
