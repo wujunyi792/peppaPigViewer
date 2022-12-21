@@ -27,4 +27,4 @@ jobs:
           goarch: ${{ matrix.goarch }}
           project_path: "./cmd"
           binary_name: "script"
-          extra_files: README.md
+          extra_files: README.md config.json.example
