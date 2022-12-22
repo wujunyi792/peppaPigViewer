@@ -9,7 +9,6 @@ import (
 	"newJwCourseHelper/internal/core"
 	"os"
 	"os/signal"
-	"strconv"
 	"syscall"
 )
 
@@ -39,7 +38,8 @@ func main() {
 		res.SetTarget(user.Target) //输出待选课程列表//继续debug，把config文件对应的结构体数组修改好
 
 		res.SetCorn(cron.New())
-		err := res.GetCorn().AddFunc("*/"+strconv.Itoa(user.Interval)+" * * * * *", func() {
+		var cornExpr = fmt.Sprintf("*/%d * * * * *", user.Interval)
+		err := res.GetCorn().AddFunc(cornExpr, func() {
 			core.Job(res)
 		})
 		if err != nil {
