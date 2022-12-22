@@ -16,6 +16,7 @@
 
 
 ## 教程
+### Release
 1. 进入[下载页](https://github.com/wujunyi792/newJwCourseHelper/releases)选择对应二进制压缩包下载并解压到文件夹
 2. 将主目录的 `config.json.example` 复制一份，重命名为 `config.json`，并修改其中的配置项
 3. 配置项修改按照下面配置文件的说明进行修改
@@ -24,6 +25,21 @@
 6. 第三个是target，里面可以写入多个课程，每个结构体中有name和type，name是要搜索的课程，这里建议填具体的教学班；type，这个是课程的类型，可以是主修课程、通识选修课、体育，分别对应填入0、1、2
 7. 第四个是interval，这个是抢课的间隔时间，单位是秒，建议设置不要低于5秒，因为抢课的时候服务器会有一定的延迟，如果设置的太小，可能会导致抢课失败 
 8. 运行可执行程序
+
+### Docker
+1. Clone this repo
+```shell
+git clone https://github.com/wujunyi792/newJwCourseHelper.git
+```
+
+将主目录的 `config.json.example` 复制一份，重命名为 `config.json`，并修改其中的配置项
+
+Btw, 使用`HELPER_CONFIG_PATH`环境变量来指定配置文件路径也是被支持的
+
+```shell
+docker build -t newjw_course_helper .
+docker run -it --volume "$PWD":/usr/src/app newjw_course_helper
+```
 
 ## 成功实例
 ![运行截图](./doc/run.jpg)

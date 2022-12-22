@@ -12,16 +12,57 @@ import (
 	"newJwCourseHelper/internal/core"
 	"os"
 	"os/signal"
-	"strconv"
 	"syscall"
 )
 
-var configFile = flag.String("f", "config.json", "Specify the config file")
+
+
 var interactiveMode = flag.Bool("i", false, "Interactive mode")
 
 var quit = make(chan os.Signal)
 var users []*core.User
 var c []config.Config
+
+var pConfigFile = flag.String("f", "config.json", "Specify the config file")
+
+const (
+	ConfigUsingNotFound = iota
+	ConfigUsingArg      = iota + 1
+	ConfigUsingEnv      = iota + 2
+)
+
+func determineConfigPath() (configPath string) {
+	var configMode = ConfigUsingNotFound
+	var envConfigPath = os.Getenv("HELPER_CONFIG_PATH")
+	if _, err := os.Stat(envConfigPath); err != nil {
+		configMode = ConfigUsingEnv
+	}
+	//if arg and env are both presented, use arg with priority
+	if _, err := os.Stat(*pConfigFile); err == nil {
+		configMode = ConfigUsingArg
+	}
+	switch configMode {
+	case ConfigUsingArg:
+		configPath = *pConfigFile
+	case ConfigUsingEnv:
+		configPath = envConfigPath
+	default:
+		panic("cannot get config path")
+	}
+	fmt.Println("config mode:", configMode, " path:", configPath)
+	return configPath
+}
+
+func main() {
+	flag.Parse()
+	var c []config.Config
+	var users []*core.User
+	var configPath = determineConfigPath()
+	content, err := os.ReadFile(configPath)
+	if err != nil {
+		panic(err)
+	}
+
 
 var ChooseCourseLoggerBuffer = &bytes.Buffer{}
 var MultiBuffer = io.MultiWriter(os.Stdout, ChooseCourseLoggerBuffer)
@@ -38,8 +79,11 @@ func ChooseCourse() {
 		//res.PrintCourseChosenList()                                   //输出已选课程列表
 		res.SetTarget(user.Target) //输出待选课程列表//继续debug，把config文件对应的结构体数组修改好
 
+		// 立刻抢课
+		core.Job(res)
 		res.SetCorn(cron.New())
-		err := res.GetCorn().AddFunc("*/"+strconv.Itoa(user.Interval)+" * * * * *", func() {
+		var cornExpr = fmt.Sprintf("*/%d * * * * *", user.Interval)
+		err := res.GetCorn().AddFunc(cornExpr, func() {
 			core.Job(res)
 		})
 		if err != nil {
