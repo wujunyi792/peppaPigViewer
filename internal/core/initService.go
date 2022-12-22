@@ -51,6 +51,10 @@ func (u *User) serviceInit() error { //TODO:在初始化函数中将其他的fir
 	u.info.field = field.GetInputField(p, nil)
 	u.info.special = idArr.FindIDArr(p, ClassNumber) //修改
 
+	if u.info.special == nil {
+		return errors.New("选课基本参数获取失败，看起来不在选课时间")
+	}
+
 	p = u.getDisplayPage(dto.MakeGetDisplayReq(u.getField()))
 	u.info.field = field.GetInputField(p, u.getField())
 
