@@ -69,6 +69,7 @@ func Execute() {
 		switch cmd {
 		case "help":
 			fmt.Println("help: show help")
+			fmt.Println("log/dmesg: print debug message")
 			fmt.Println("list/status: list all user status currently")
 			fmt.Println("relogin: forced re auth to the server")
 			fmt.Println("quit/exit: exit the program")
@@ -94,6 +95,9 @@ func Execute() {
 				log.Printf("This is user #%v Error: %v \n", k, user.Error())
 			}
 		case "quit", "exit":
+			for i := 0; i < len(users); i++ {
+				users[i].GetCorn().Stop()
+			}
 			quit <- syscall.SIGTERM
 			os.Exit(0)
 		}
