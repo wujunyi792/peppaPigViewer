@@ -17,14 +17,14 @@ func FindIDArr(body string, classNumber int) map[string][]string { //可以返�
 	//根据规则提取关键信息
 	result1 := reg1.FindAllStringSubmatch(body, -1)
 	if len(result1) != 4 || len(result1[0]) != 2 {
-		fmt.Println("re错误!") //TODO:错误处理
+		fmt.Println("选课基本参数获取失败，看起来不在选课时间") //TODO:错误处理
 		return nil
 	}
 	for i := 0; i < classNumber; i++ {
 		result2 := reg2.FindAllStringSubmatch(result1[i][1], -1)
 		//fmt.Println(result1[i])
 		if len(result2) != 4 || len(result2[0]) != 2 {
-			fmt.Println("re错误!")
+			fmt.Println("选课基本参数获取失败，看起来不在选课时间")
 			return nil
 		}
 		returnTemp["firstKklxdmArr"][i] = result2[0][1]

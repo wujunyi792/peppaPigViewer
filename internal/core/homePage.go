@@ -48,7 +48,10 @@ func (u *User) getStaffId() string {
 	matches := re.FindAllStringSubmatch(body.(string), -1)
 	if len(matches) == 0 {
 		log.Println("Err when find core session id")
+		log.Println("无法从首页获取用户学号，将使用默认用户名")
+		u.info.staffId = u.loginUser
+	} else {
+		u.info.staffId = matches[0][1]
 	}
-	u.info.staffId = matches[0][1]
-	return matches[0][1]
+	return u.info.staffId
 }

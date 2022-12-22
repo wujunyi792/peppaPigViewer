@@ -2,6 +2,7 @@ package core
 
 import (
 	"errors"
+	"log"
 	"net/url"
 	"newJwCourseHelper/internal/dto"
 	"newJwCourseHelper/internal/util/field"
@@ -31,7 +32,14 @@ func (u *User) serviceInit() error { //TODO:在初始化函数中将其他的fir
 		}
 	}
 	if !flag {
-		return errors.New("look like not in correct time to choose a course")
+		log.Println("无法找到选课入口，可能当前不在选课时间，也可能网站裂了，也可能你被ban了，将使用默认入口")
+		reqUrl.Path += DEFAULTCHOOSECLASSURL
+		query := make(url.Values)
+		query.Add("gnmkdm", "N253512")
+		query.Add("layout", "default")
+		query.Add("su", u.getStaffId())
+		reqUrl.RawQuery = query.Encode()
+		lid = "N253512"
 	}
 
 	baseQuery := make(url.Values)
