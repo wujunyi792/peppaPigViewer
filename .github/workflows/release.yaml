@@ -27,4 +27,4 @@ jobs:
           goarch: ${{ matrix.goarch }}
           project_path: "./cmd"
           binary_name: "newJWCourseHelper"
-          extra_files: "config.json.example" "README.md"
+          extra_files: config.json.example README.md
