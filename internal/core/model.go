@@ -32,6 +32,7 @@ type Target struct {
 
 type User struct {
 	auth        *cas.NewJW
+	loginUser   string
 	retryConfig *config.Config
 
 	formParam     map[string]string
