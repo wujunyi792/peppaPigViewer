@@ -2,7 +2,6 @@ package core
 
 import (
 	"errors"
-	"log"
 	"net/url"
 	"newJwCourseHelper/internal/dto"
 	"newJwCourseHelper/internal/util/field"

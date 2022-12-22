@@ -3,7 +3,6 @@ package core
 import (
 	"errors"
 	"fmt"
-	"log"
 	"newJwCourseHelper/internal/dto"
 	"strconv"
 )
