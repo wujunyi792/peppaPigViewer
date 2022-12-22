@@ -66,6 +66,7 @@ func Execute() {
 		fmt.Printf("Console> ")
 		_, _ = fmt.Scanln(&cmd)
 
+		// Todo: Process command Should not be there. Need reform later.
 		switch cmd {
 		case "help":
 			fmt.Println("help: show help")
