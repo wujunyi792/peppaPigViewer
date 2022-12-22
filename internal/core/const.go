@@ -17,6 +17,8 @@ var (
 	JwApiChooseCourse = "/xsxk/zzxkyzbjk_xkBcZyZzxkYzb.html?"
 )
 
+const DEFAULTCHOOSECLASSURL = "/xsxk/zzxkyzb_cxZzxkYzbIndex.html"
+
 // JwApiHome 主页api
 type JwApiHome string
 
