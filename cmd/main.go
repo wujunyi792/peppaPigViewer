@@ -6,8 +6,8 @@ import (
 	"flag"
 	"fmt"
 	"github.com/robfig/cron"
+	"io"
 	"log"
-	log2 "log"
 	"newJwCourseHelper/internal/config"
 	"newJwCourseHelper/internal/core"
 	"os"
@@ -17,13 +17,15 @@ import (
 )
 
 var configFile = flag.String("f", "config.json", "Specify the config file")
+var interactiveMode = flag.Bool("i", false, "Interactive mode")
 
 var quit = make(chan os.Signal)
 var users []*core.User
 var c []config.Config
 
 var ChooseCourseLoggerBuffer = &bytes.Buffer{}
-var ChooseCourseLogger = log2.New(ChooseCourseLoggerBuffer, "[DebugMessage] ", log.LstdFlags)
+var MultiBuffer = io.MultiWriter(os.Stdout, ChooseCourseLoggerBuffer)
+var ChooseCourseLogger = log.New(MultiBuffer, "[DebugMessage] ", log.LstdFlags)
 
 // Auto ChooseCourse func will start with new go runtime
 func ChooseCourse() {
@@ -101,6 +103,12 @@ func Execute() {
 func main() {
 	flag.Parse()
 
+	if *interactiveMode {
+		ChooseCourseLogger = log.New(ChooseCourseLoggerBuffer, "[DebugMessage] ", log.LstdFlags)
+	} else {
+		ChooseCourseLogger = log.New(os.Stdout, "", log.LstdFlags)
+	}
+
 	content, err := os.ReadFile(*configFile)
 	if err != nil {
 		panic(err)
@@ -115,5 +123,8 @@ func main() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
 	go ChooseCourse()
-	Execute()
+	if *interactiveMode {
+		Execute()
+	}
+	<-quit
 }
