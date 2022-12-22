@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"github.com/robfig/cron"
 	"log"
+	log2 "log"
 	"newJwCourseHelper/internal/config"
 	"newJwCourseHelper/internal/core"
 	"os"
@@ -20,8 +22,12 @@ var quit = make(chan os.Signal)
 var users []*core.User
 var c []config.Config
 
+var ChooseCourseLoggerBuffer = &bytes.Buffer{}
+var ChooseCourseLogger = log2.New(ChooseCourseLoggerBuffer, "[DebugMessage] ", log.LstdFlags)
+
 // Auto ChooseCourse func will start with new go runtime
 func ChooseCourse() {
+	core.Init(ChooseCourseLogger)
 	for _, user := range c {
 		res, e := core.LoadConfig(user).LoginPW(user.User.StaffId, user.User.Password) //用户登录（TODO:不需要多次登录，可以直接传入Token）
 		if e != nil {
@@ -35,7 +41,7 @@ func ChooseCourse() {
 			core.Job(res)
 		})
 		if err != nil {
-			fmt.Printf("用户 %s 定时任务添加失败: %v", user.User.StaffId, err)
+			log.Printf("用户 %s 定时任务添加失败: %v", user.User.StaffId, err)
 		}
 		users = append(users, res)
 	}
@@ -59,10 +65,19 @@ func Execute() {
 		_, _ = fmt.Scanln(&cmd)
 
 		switch cmd {
-		case "list":
-			for i := 0; i < len(users); i++ {
-				log.Printf("This is the User #%v Chosen CourseList \n")
-				users[i].PrintCourseChosenList()
+		case "help":
+			fmt.Println("help: show help")
+			fmt.Println("list/status: list all user status currently")
+			fmt.Println("relogin: forced re auth to the server")
+			fmt.Println("quit/exit: exit the program")
+		case "log", "dmesg":
+			fmt.Println(ChooseCourseLoggerBuffer)
+		case "list", "status":
+			for k, user := range users {
+				log.Printf("This is the User #%v Chosen CourseList \n", k)
+				user.PrintCourseChosenList()
+				log.Printf("This is the User #%v Target CourseList \n", k)
+				user.PrintFireCourseList()
 			}
 		case "relogin":
 			for k, user := range users {
@@ -72,7 +87,11 @@ func Execute() {
 					log.Printf("Re Login user[%v] got error: %v \n", k, err)
 				}
 			}
-		case "quit":
+		case "geterror":
+			for k, user := range users {
+				log.Printf("This is user #%v Error: %v \n", k, user.Error())
+			}
+		case "quit", "exit":
 			quit <- syscall.SIGTERM
 			os.Exit(0)
 		}

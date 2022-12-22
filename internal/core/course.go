@@ -2,7 +2,6 @@ package core
 
 import (
 	"github.com/pkg/errors"
-	"log"
 	"newJwCourseHelper/internal/dto"
 )
 

@@ -2,7 +2,6 @@ package core
 
 import (
 	"github.com/robfig/cron"
-	"log"
 )
 
 func (u *User) GetCorn() *cron.Cron {
