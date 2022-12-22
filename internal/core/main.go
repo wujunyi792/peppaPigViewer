@@ -1,17 +1,16 @@
 package core
 
 import (
-	"fmt"
 	cas "github.com/wujunyi792/hdu-cas-helper"
 	"newJwCourseHelper/internal/config"
 )
 
 func (u *User) LoginPW(username, password string) (*User, error) {
-	fmt.Printf("用户 %s 准备开始登录\n", username)
+	log.Printf("用户 %s 准备开始登录\n", username)
 	ticket := cas.CasPasswordLogin(username, password)
-	fmt.Printf("用户 %s cas 登录成功，开始登录教务...\n", username)
+	log.Printf("用户 %s cas 登录成功，开始登录教务...\n", username)
 	session := cas.NewJWLogin(ticket)
-	fmt.Printf("用户 %s 教务登录成功\n", username)
+	log.Printf("用户 %s 教务登录成功\n", username)
 	if err := session.Error(); err != nil {
 		return nil, err
 	}
