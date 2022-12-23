@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/robfig/cron"
 	"io"
 	"log"
 	"newJwCourseHelper/internal/core"
+	"newJwCourseHelper/internal/util/parse2cron"
 	"os"
 	"syscall"
+
+	"github.com/robfig/cron"
 )
 
 var ChooseCourseLoggerBuffer = &bytes.Buffer{}
@@ -31,8 +33,7 @@ func ChooseCourse() {
 		// 立刻抢课
 		core.Job(res)
 		res.SetCorn(cron.New())
-		var cornExpr = fmt.Sprintf("*/%d * * * * *", user.Interval)
-		err := res.GetCorn().AddFunc(cornExpr, func() {
+		err := res.GetCorn().AddFunc(parse2cron.FromSeconds(user.Interval), func() {
 			core.Job(res)
 		})
 		if err != nil {
