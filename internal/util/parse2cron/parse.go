@@ -8,6 +8,21 @@ type cronEntity struct {
 	cuts [4]int
 }
 
+func (ce *cronEntity) Seconds(sec int) *cronEntity {
+	ce.cuts[0] += sec
+	return ce
+}
+
+func (ce *cronEntity) Minutes(min int) *cronEntity {
+	ce.cuts[1] += min
+	return ce
+}
+
+func (ce *cronEntity) Hours(hr int) *cronEntity {
+	ce.cuts[2] += hr
+	return ce
+}
+
 func (ce *cronEntity) End() string {
 	for i := 0; i < 3; i++ {
 		ce.cuts[i], ce.cuts[i+1] = ce.cuts[i]%60, ce.cuts[i]/60+ce.cuts[i+1]

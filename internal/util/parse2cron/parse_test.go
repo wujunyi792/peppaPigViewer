@@ -1,6 +1,7 @@
 package parse2cron_test
 
 import (
+	"fmt"
 	"newJwCourseHelper/internal/util/parse2cron"
 	"testing"
 )
@@ -50,4 +51,8 @@ func TestFromSeconds(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestCronEntity(t *testing.T) {
+	fmt.Printf("parse2cron.Seconds(10).Minutes().Hours().End(): %v\n", parse2cron.Seconds(80).Minutes(20).Hours(1).End())
 }
